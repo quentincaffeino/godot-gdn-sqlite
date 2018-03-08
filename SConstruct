@@ -67,11 +67,13 @@ elif platform == 'osx':
 env.Append(CPPPATH = [ 'src', 'include', godot_headers, cpp_bindings + '/include', cpp_bindings + '/include/core' ])
 env.Append(LIBS = [ 'godot-cpp.' + target_platform + '.' + target_arch ])
 env.Append(LIBPATH = [ cpp_bindings + '/include', cpp_bindings + '/bin', 'lib' ])
-SConscript('SConscript', 'env target_platform target_arch host_platform')
 
 
 sources = []
 add_sources(sources, 'src', 'cpp')
+
+
+SConscript('SConscript', 'env target_platform target_arch host_platform sources')
 
 
 library = env.SharedLibrary(target=result_path + '/' + result_name, source=sources)
