@@ -1,5 +1,5 @@
 
-BASE = scons n=GDSQLite -j4
+BASE = scons n=GDNSQLite -j4
 LINUX = $(BASE) p=linux
 WINDOWS = $(BASE) p=windows
 OSX = $(BASE) p=osx

@@ -17,12 +17,12 @@ env['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
 
 
 # SQLite
-add_sources(sources, 'lib/sqlite3', 'c')
-env.Append(CPPPATH = [ 'lib/sqlite3' ])
-env.Append(CCFLAGS = [ '-DSQLITE_OMIT_LOAD_EXTENSION', '-DSQLITE_CORE', '-O2' ])
+add_sources(sources, 'lib/sqlite', 'c')
+env.Append(CPPPATH = [ 'lib/sqlite' ])
+env.Append(CFLAGS = [ '-DSQLITE_CORE', '-DSQLITE_OMIT_DEPRECATED', '-O2' ])
 env.Append(LIBS = [ 'pthread' ])
 
 
 # SQLite wrapper
-add_sources(sources, 'lib/sqlite3pp/src', 'cpp')
-env.Append(CPPPATH = [ 'lib/sqlite3pp/src' ])
+add_sources(sources, 'lib/SQLiteCpp/src', 'cpp')
+env.Append(CPPPATH = [ 'lib/SQLiteCpp/src', 'lib/SQLiteCpp/include' ])

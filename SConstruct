@@ -28,8 +28,11 @@ result_name = ARGUMENTS.get('n', ARGUMENTS.get('name', os.path.relpath('.', '..'
 if target_platform == 'linux':
   result_name += '.linux.' + target_arch
 
+  env['CC']='gcc-5'
   env['CXX']='gcc-5'
-  env.Append(CCFLAGS = [ '-fPIC', '-g', '-O3', '-std=c++14', '-Wwrite-strings' ])
+  env.Append(CFLAGS = [ '-std=c99' ])
+  env.Append(CXXFLAGS = [ '-std=c++14' ])
+  env.Append(CCFLAGS = [ '-fPIC', '-g', '-O3', '-Wwrite-strings' ])
   env.Append(LINKFLAGS = [ '-Wl,-R,\'$$ORIGIN\'' ])
 
   if target_arch == '32':
@@ -47,20 +50,26 @@ elif target_platform == 'windows':
 
     env.Append(LINKFLAGS = [ '/WX' ])
     if target == 'debug':
-      env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '/MDd' ])
+      env.Append(CXXFLAGS = ['-EHsc', '-D_DEBUG', '/MDd' ])
     else:
-      env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '/MD' ])
+      env.Append(CXXFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '/MD' ])
   else:
     if target_arch == '32':
+      env['CC']='i686-w64-mingw32-gcc'
       env['CXX']='i686-w64-mingw32-g++'
     elif target_arch == '64':
+      env['CC']='x86_64-w64-mingw32-gcc'
       env['CXX']='x86_64-w64-mingw32-g++'
 
-    env.Append(CCFLAGS = [ '-g', '-O3', '-std=c++14', '-Wwrite-strings' ])
+    env.Append(CFLAGS = [ '-std=c99' ])
+    env.Append(CXXFLAGS = [ '-std=c++14' ])
+    env.Append(CCFLAGS = [ '-fPIC', '-g', '-O3', '-Wwrite-strings' ])
     env.Append(LINKFLAGS = [ '--static', '-Wl,--no-undefined', '-static-libgcc', '-static-libstdc++' ])
 
 elif platform == 'osx':
-  env.Append(CCFLAGS = [ '-g','-O3', '-std=c++14', '-arch', 'x86_64' ])
+  env.Append(CFLAGS = [ '-std=c99' ])
+  env.Append(CXXFLAGS = [ '-std=c++14' ])
+  env.Append(CCFLAGS = [ '-fPIC', '-g', '-O3', '-Wwrite-strings' ])
   env.Append(LINKFLAGS = [ '-arch', 'x86_64', '-framework', 'Cocoa', '-Wl,-undefined,dynamic_lookup' ])
 
 

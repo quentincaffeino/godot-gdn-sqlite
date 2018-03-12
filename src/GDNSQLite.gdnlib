@@ -1,0 +1,20 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+Windows.64="res://vendor/quentincaffeino/gdnsqlite/bin/libGDNSQLite.windows.64.dll"
+Windows.32="res://vendor/quentincaffeino/gdnsqlite/bin/libGDNSQLite.windows.32.dll"
+X11.64="res://vendor/quentincaffeino/gdnsqlite/bin/libGDNSQLite.linux.64.so"
+X11.32="res://vendor/quentincaffeino/gdnsqlite/bin/libGDNSQLite.linux.32.so"
+
+[dependencies]
+
+Windows.64=[  ]
+Windows.32=[  ]
+X11.64=[  ]
+X11.32=[  ]
